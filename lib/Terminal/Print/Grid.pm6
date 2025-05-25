@@ -95,7 +95,7 @@ method set-span($x, $y, Str $text, $color) {
     }
     else {
         my @chars = $text.comb;
-        $row.splice($x, +@chars, @chars);
+        $row.splice($x, +@chars, @chars) if $row.defined;
     }
 }
 

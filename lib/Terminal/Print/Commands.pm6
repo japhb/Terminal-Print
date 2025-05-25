@@ -22,7 +22,7 @@ our @fg_colors = [ <black red green yellow blue magenta cyan white default> ];
 our @bg_colors = [ <on_black on_red on_green on_yellow on_blue on_magenta on_cyan on_white on_default> ];
 our @styles    = [ <reset bold underline inverse> ];
 
-subset Terminal::Print::CursorProfile is export where * ~~ / ^('ansi' | 'universal')$ /;
+subset Terminal::Print::CursorProfile is export where * eq <ansi universal>.any;
 
 # we can add more, but there is a qq:x call so whitelist is the way to go.
 
@@ -136,7 +136,7 @@ CATCH
 		# If we're just dying because of a missing capa, we need to clean up as much as we can
 		# (with some other capa's potentially missing) and ensure that the error message is not cleared.
 		my ($clear, $rmcup, $cnorm) = tput("clear"), tput("rmcup"), tput("cnorm");
-		print $clear if $clear !~~ -1; 
+		print $clear if $clear !~~ -1;
 		print $rmcup if $rmcup !~~ -1;
 		print $cnorm if $cnorm !~~ -1;
 
